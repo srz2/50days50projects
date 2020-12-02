@@ -11,19 +11,29 @@
 
 template_path=./template
 
+project_name=$1
+custom_path=$2
+
 # Check that a project name is provided
-if [ "$1" == "" ]; then
+if [ "$project_name" == "" ]; then
     echo Define a new project name
     exit 1
 else
-    echo Creating $1
+    echo Creating $project_name
 fi
 
 # Copy template to desired location
-if [ "$2" == "" ]; then
+if [ "$custom_path" == "" ]; then
+    mkdir -p web
+
     # If no argument, default to web
-    cp -r $template_path web/$1
+    cp -r $template_path web/$project_name
 else
+    if [ -d $custom_path ]; then
+        echo [Error]: $custom_path Does not exist
+        exit 2
+    fi
+
     # otherwise copy to defined path
-    cp -r $template_path $2/$1
+    cp -r $template_path $custom_path/$project_name
 fi
