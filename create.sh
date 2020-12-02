@@ -29,8 +29,8 @@ if [ "$custom_path" == "" ]; then
     # If no argument, default to web
     cp -r $template_path web/$project_name
 else
-    if [ -d $custom_path ]; then
-        echo [Error]: $custom_path Does not exist
+    if [ ! -d $custom_path ]; then
+        echo [Error]: Path $custom_path does not exist
         exit 2
     fi
 
